@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int maxn=100005;
+bool visited[maxn];
+vector<int>adj[maxn];
+int dist[maxn];
+int qq=-1;
+void bfs(int s)
+{
+
+    dist[s]=0;
+    visited[s]=true;
+    queue<int>q;
+    q.push(s);
+
+    while(q.size())
+    {
+        //cout<<q.size()<<" dfgs "<<q.front()<<" dist= "<<dist[q.front()]<<" "<<qq<<endl;
+        int u=q.front();
+        q.pop();
+        for(auto x:adj[u])
+        {
+            //int v=adj[u][i];
+            if(visited[x]==false)
+            {
+
+                visited[x]=true;
+                dist[x]+=dist[u]+1;
+                // cout<<qq<<endl;
+
+                q.push(x);
+
+            }
+        }
+    }
+
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int i,p=0;
+    for(i=1; i<=n; i++)
+    {
+        int j;
+        cin>>j;
+        if(j == -1)
+        {
+
+            adj[0].push_back(i);
+        }
+        else
+        {
+            adj[j].push_back(i);
+        }
+    }
+    bfs(0);
+    int d=bfs(0);
+
+    cout<<d<<endl;
+
+
+
+    return 0;
+}
